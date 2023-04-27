@@ -9,7 +9,7 @@ import datetime
 import json
 import re
 
-from ..utils import get_cluster_rp_api_version
+from ..utils import get_arc_autonomou_cloud_fqdn, get_cluster_rp_api_version, is_arc_autonomous_cloud
 from .. import consts
 
 from knack.log import get_logger
@@ -59,8 +59,12 @@ class ContainerInsights(DefaultExtension):
                        'only supports cluster scope and single instance of this extension.', extension_type)
         logger.warning("Defaulting to extension name '%s' and release-namespace '%s'", name, release_namespace)
 
-        _get_container_insights_settings(cmd, resource_group_name, cluster_rp, cluster_type, cluster_name, configuration_settings,
-                                         configuration_protected_settings, is_ci_extension_type)
+        if not is_arc_autonomous_cloud(configuration_settings):
+            _get_container_insights_settings(cmd, resource_group_name, cluster_rp, cluster_type, cluster_name, configuration_settings,
+                                             configuration_protected_settings, is_ci_extension_type)
+        else:
+            logger.info('Overriding the FQDN configuration automatically for Arc Autonommous')
+            configuration_settings['Azure.proxySettings.autonomousFqdn'] = get_arc_autonomou_cloud_fqdn(cmd)
 
         # NOTE-2: Return a valid Extension object, Instance name and flag for Identity
         create_identity = True
