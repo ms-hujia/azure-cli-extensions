@@ -9,7 +9,7 @@ import datetime
 import json
 import re
 
-from ..utils import get_arc_autonomou_cloud_fqdn, get_cluster_rp_api_version, is_arc_autonomous_cloud
+from ..utils import get_arc_autonomous_cloud_fqdn, get_cluster_rp_api_version, is_arc_autonomous_cloud
 from .. import consts
 
 from knack.log import get_logger
@@ -63,8 +63,8 @@ class ContainerInsights(DefaultExtension):
             _get_container_insights_settings(cmd, resource_group_name, cluster_rp, cluster_type, cluster_name, configuration_settings,
                                              configuration_protected_settings, is_ci_extension_type)
         else:
-            logger.info('Overriding the FQDN configuration automatically for Arc Autonommous')
-            configuration_settings['Azure.proxySettings.autonomousFqdn'] = get_arc_autonomou_cloud_fqdn(cmd)
+            logger.info('Overriding the FQDN configuration automatically for Winfield')
+            configuration_settings['Azure.proxySettings.autonomousFqdn'] = get_arc_autonomous_cloud_fqdn(cmd)
 
         # NOTE-2: Return a valid Extension object, Instance name and flag for Identity
         create_identity = True

@@ -57,26 +57,26 @@ def is_dogfood_cluster(cmd):
 
 
 def is_arc_autonomous_cloud(configuration_settings):
-    # Determine if the cloud is Arc Autonomous by checking a configuration setting named isArcAutonomous.
+    # Determine if the cloud is Arc Autonomous by checking a configuration setting named isWinfield.
     is_arc_autonomous = False
 
-    if 'isArcAutonomous' in configuration_settings:
-        is_arc_autonomous_setting = configuration_settings['isArcAutonomous']
+    if 'isWinfield' in configuration_settings:
+        is_arc_autonomous_setting = configuration_settings['isWinfield']
         if (isinstance(is_arc_autonomous_setting, str) and str(is_arc_autonomous_setting).lower() == "true") or (isinstance(is_arc_autonomous_setting, bool) and is_arc_autonomous_setting):
             is_arc_autonomous = True
-            del configuration_settings['isArcAutonomous']
+            del configuration_settings['isWinfield']
 
     return is_arc_autonomous
 
 
-def get_arc_autonomou_cloud_fqdn(cmd):
+def get_arc_autonomous_cloud_fqdn(cmd):
     # Get the Arc Autonomous FQDN.
-    metadata = get_metadata(cmd.cli_ctx.cloud.endpoints.resource_manager, "2022-09-01")
+    metadata = get_metadata(cmd.cli_ctx.cloud.endpoints.resource_manager)
 
     return metadata['suffixes']['storage']
 
 
-def get_metadata(arm_endpoint, api_version="2015-01-01"):
+def get_metadata(arm_endpoint, api_version="2022-09-01"):
     metadata_url_suffix = f"/metadata/endpoints?api-version={api_version}"
     try:
         error_msg_fmt = "Unable to get metadata endpoints from the cloud.\n{}"

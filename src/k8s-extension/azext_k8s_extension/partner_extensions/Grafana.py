@@ -27,7 +27,7 @@ class Grafana(DefaultExtension):
                plan_name, plan_publisher, plan_product):
         # Check whether cloud is Arc Autonomous.
         if not is_arc_autonomous_cloud(configuration_settings):
-            raise CLIError("Grafana extension is only available in Arc Autonomous")
+            raise CLIError("Grafana extension is only available in Winfield")
 
         # Override extension name, release-namespace and scope.
         name = 'azuremonitor-grafana'
@@ -65,7 +65,7 @@ class Grafana(DefaultExtension):
         logger.info(sp)
 
         # Override the configuration setting including FQDN and AAD application ID.
-        logger.info('Overriding the FQDN configuration automatically for Arc Autonommous')
+        logger.info('Overriding the FQDN configuration automatically for Winfield')
 
         metadata = get_metadata(cmd.cli_ctx.cloud.endpoints.resource_manager, "2022-09-01")
 

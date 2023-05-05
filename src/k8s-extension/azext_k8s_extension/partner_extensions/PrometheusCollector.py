@@ -7,7 +7,7 @@
 
 from knack.log import get_logger
 
-from ..utils import get_arc_autonomou_cloud_fqdn, is_arc_autonomous_cloud
+from ..utils import get_arc_autonomous_cloud_fqdn, is_arc_autonomous_cloud
 from .DefaultExtension import DefaultExtension
 
 logger = get_logger(__name__)
@@ -29,8 +29,8 @@ class PrometheusCollector(DefaultExtension):
         logger.warning("Defaulting to extension name '%s' and release-namespace '%s'", name, release_namespace)
 
         if is_arc_autonomous_cloud(configuration_settings):
-            logger.info('Overriding the FQDN configuration automatically for Arc Autonommous')
-            configuration_settings['Azure.proxySettings.autonomousFqdn'] = get_arc_autonomou_cloud_fqdn(cmd)
+            logger.info('Overriding the FQDN configuration automatically for Winfield')
+            configuration_settings['Azure.proxySettings.autonomousFqdn'] = get_arc_autonomous_cloud_fqdn(cmd)
 
         return DefaultExtension.Create(self, cmd, client, resource_group_name, cluster_name, name, cluster_type, cluster_rp,
                                        extension_type, scope, auto_upgrade_minor_version, release_train, version, target_namespace,
