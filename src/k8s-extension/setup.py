@@ -33,7 +33,7 @@ CLASSIFIERS = [
 # TODO: Add any additional SDK dependencies here
 DEPENDENCIES = []
 
-VERSION = "1.4.0"
+VERSION = "1.4.0+winfield.preview"
 
 with open("README.rst", "r", encoding="utf-8") as f:
     README = f.read()
