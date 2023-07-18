@@ -64,7 +64,7 @@ class ContainerInsights(DefaultExtension):
             _get_container_insights_settings(cmd, resource_group_name, cluster_rp, cluster_type, cluster_name, configuration_settings,
                                              configuration_protected_settings, is_ci_extension_type)
         else:
-            logger.info("Provisioning to prerequisites is skipped")
+            logger.info("Provisioning of prerequisites is skipped")
 
         # NOTE-2: Return a valid Extension object, Instance name and flag for Identity
         create_identity = True
@@ -91,7 +91,7 @@ class ContainerInsights(DefaultExtension):
 
         if (extension is not None) and (extension.configuration_settings is not None):
             if is_skip_prerequisites_specified(extension.configuration_settings):
-                logger.info("Deprovisioning to prerequisites is skipped")
+                logger.info("Deprovisioning of prerequisites is skipped")
                 return
 
         subscription_id = get_subscription_id(cmd.cli_ctx)

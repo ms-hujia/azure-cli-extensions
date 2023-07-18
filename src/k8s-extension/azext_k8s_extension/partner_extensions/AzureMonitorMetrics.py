@@ -60,7 +60,7 @@ class AzureMonitorMetrics(DefaultExtension):
                 cluster_type
             )
         else:
-            logger.info("Provisioning to prerequisites is skipped")
+            logger.info("Provisioning of prerequisites is skipped")
 
         create_identity = True
         extension = Extension(
@@ -83,7 +83,7 @@ class AzureMonitorMetrics(DefaultExtension):
 
         if (extension is not None) and (extension.configuration_settings is not None):
             if is_skip_prerequisites_specified(extension.configuration_settings):
-                logger.info("Deprovisioning to prerequisites is skipped")
+                logger.info("Deprovisioning of prerequisites is skipped")
                 return
 
         cluster_subscription = get_subscription_id(cmd.cli_ctx)
